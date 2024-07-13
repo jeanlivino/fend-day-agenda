@@ -18,6 +18,7 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
+				"bradlc.vscode-tailwindcss",
 				"eamodio.gitlens",
 				"yoavbls.pretty-ts-errors",
 				"vitest.explorer",
