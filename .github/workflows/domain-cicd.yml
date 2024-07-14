@@ -5,15 +5,76 @@ on:
     branches:
       - main
 
+env:
+  ENV: prd
+
 jobs:
   cicd:
-    uses: frontend-ce/fend-day-workflow/.github/workflows/cicd-do.yml@main
-    with:
-      ENV: "prd"
-      GITHUB_REPOSITORY: ${{ github.repository }}
-    secrets:
-      DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-      DIGITALOCEAN_CLUSTER_ID: ${{ secrets.DIGITALOCEAN_CLUSTER_ID }}
-      DIGITALOCEAN_REGISTRY: ${{ secrets.DIGITALOCEAN_REGISTRY }}
-      SERVICE_URL: ${{ secrets.SERVICE_URL }}
-      K8S_NAMESPACE: ${{ secrets.K8S_NAMESPACE }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Load environment values
+        id: load-env
+        run: |
+          # build envs
+          if [ ${{ env.ENV }} == "prd" ]
+          then
+            export SERVICE_URL="${{ secrets.SERVICE_URL }}"
+            export DEPLOYMENT_FILE="deployment"
+          else
+            export SERVICE_URL="${{ env.ENV }}-${{ secrets.SERVICE_URL }}"
+            export DEPLOYMENT_FILE="deployment-${{ env.ENV }}"
+          fi
+
+          # export IMAGE_TAG=${GITHUB_REPOSITORY_NAME}:${{ github.sha }}
+          export GITHUB_REPOSITORY_NAME=$(echo "${GITHUB_REPOSITORY#*/}" | tr '[:upper:]' '[:lower:]')-${{ env.ENV }}
+          export IMAGE_TAG=${GITHUB_REPOSITORY_NAME}:latest
+          export IMAGE_REPO_URL=registry.digitalocean.com/${{ secrets.DIGITALOCEAN_REGISTRY }}/${IMAGE_TAG}
+          export REGISTRY_ID=${{ secrets.DIGITALOCEAN_REGISTRY }}
+
+          echo "Pusing new image to: $IMAGE_REPO_URL"
+
+          echo "IMAGE_TAG=${IMAGE_TAG}" >> $GITHUB_ENV
+          echo "IMAGE_REPO_URL=${IMAGE_REPO_URL}" >> $GITHUB_ENV
+          echo "K8S_NAMESPACE=${{ secrets.K8S_NAMESPACE }}" >> $GITHUB_ENV
+          echo "REGISTRY_ID=${REGISTRY_ID}" >> $GITHUB_ENV
+          echo "SERVICE_URL=$SERVICE_URL" >> $GITHUB_ENV
+          echo "SERVICE_CERTIFICATE_ARN=${SERVICE_CERTIFICATE_ARN}" >> $GITHUB_ENV
+          echo "SERVICE_NAME=${GITHUB_REPOSITORY_NAME}" >> $GITHUB_ENV
+          echo "SERVICE_NAME_TAG=${GITHUB_REPOSITORY_NAME}" >> $GITHUB_ENV
+
+          echo "GITHUB_REPOSITORY_NAME=${GITHUB_REPOSITORY_NAME}" >> $GITHUB_OUTPUT
+          echo "IMAGE_TAG=${IMAGE_TAG}" >> $GITHUB_OUTPUT
+          echo "IMAGE_REPO_URL=${IMAGE_REPO_URL}" >> $GITHUB_OUTPUT
+          echo "DEPLOYMENT_FILE=${DEPLOYMENT_FILE}" >> $GITHUB_OUTPUT
+
+      - name: Build container image
+        run: docker build -t ${{ steps.load-env.outputs.IMAGE_REPO_URL }} --build-arg envDocker=${{ env.ENV }} .
+
+      - name: Log in to DigitalOcean Container Registry with short-lived credentials
+        run: doctl registry login --expiry-seconds 1200
+
+      - name: Push image to DigitalOcean Container Registry
+        run: docker push ${{ steps.load-env.outputs.IMAGE_REPO_URL }}
+
+      - name: Save DigitalOcean kubeconfig with short-lived credentials
+        run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 ${{ secrets.DIGITALOCEAN_CLUSTER_ID }}
+
+      - name: Change manifest using environment values
+        run: |
+          envsubst < manifests/${{ steps.load-env.outputs.DEPLOYMENT_FILE }}.yaml > manifests/output.yaml
+
+      - name: Apply kubernetes deploy configuration
+        run: |
+          kubectl get ns -A
+          kubectl apply -f ./manifests/output.yaml
+
+      - name: Rollout deploy (IMAGE_TAG with tag latest)
+        run: |
+          kubectl rollout restart deploy ${{ steps.load-env.outputs.GITHUB_REPOSITORY_NAME }} -n ${{ secrets.K8S_NAMESPACE }}
