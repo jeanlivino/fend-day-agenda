@@ -1,0 +1,109 @@
+---
+# deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: $K8S_NAMESPACE
+  annotations:
+    configmap.reloader.stakater.com/reload: $SERVICE_NAME
+  labels:
+    name: $SERVICE_NAME_TAG
+  name: $SERVICE_NAME
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      name: $SERVICE_NAME_TAG
+  template:
+    metadata:
+      annotations:
+        configmap.reloader.stakater.com/reload: $SERVICE_NAME
+      labels:
+        name: $SERVICE_NAME_TAG
+    spec:
+      imagePullSecrets:
+        - name: $REGISTRY_ID
+      containers:
+        - name: $SERVICE_NAME
+          image: $IMAGE_REPO_URL
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 5m
+              memory: 64Mi
+          ports:
+            - containerPort: 80
+          startupProbe:
+            httpGet:
+              path: /
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 50
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 30
+            successThreshold: 1
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 120
+            periodSeconds: 60
+            timeoutSeconds: 5
+            failureThreshold: 3
+            successThreshold: 1
+          envFrom:
+            - secretRef:
+                name: $SERVICE_NAME
+
+---
+# service
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: $K8S_NAMESPACE
+  name: $SERVICE_NAME
+spec:
+  ports:
+    - name: http
+      targetPort: 80
+      port: 80
+  selector:
+    name: $SERVICE_NAME_TAG
+
+---
+# dns
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: $K8S_NAMESPACE
+  name: $SERVICE_NAME
+  annotations:
+    cert-manager.io/cluster-issuer: 'letsencrypt-prod'
+    cert-manager.io/issue-temporary-certificate: 'true'
+    kubernetes.io/ingress.class: 'nginx'
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - $SERVICE_URL
+      secretName: $SERVICE_NAME-tls
+  rules:
+    - host: $SERVICE_URL
+      http:
+        paths:
+          - pathType: ImplementationSpecific
+            backend:
+              service:
+                name: $SERVICE_NAME
+                port:
+                  number: 80

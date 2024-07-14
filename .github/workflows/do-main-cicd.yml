@@ -1,0 +1,19 @@
+name: CI/CD - Production - DO
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  cicd:
+    uses: frontend-ce/fend-day-workflow/.github/workflows/cicd-do.yml@main
+    with:
+      ENV: "prd"
+      GITHUB_REPOSITORY: ${{ github.repository }}
+    secrets:
+      DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      DIGITALOCEAN_CLUSTER_ID: ${{ secrets.DIGITALOCEAN_CLUSTER_ID }}
+      DIGITALOCEAN_REGISTRY: ${{ secrets.DIGITALOCEAN_REGISTRY }}
+      SERVICE_URL: ${{ secrets.SERVICE_URL }}
+      K8S_NAMESPACE: ${{ secrets.K8S_NAMESPACE }}
