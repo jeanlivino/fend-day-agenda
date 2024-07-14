@@ -6,6 +6,7 @@ import { withThemeByClassName } from "@storybook/addon-themes";
 
 
 const preview: Preview = {
+  tags: ['autodocs'],
   parameters: {
     controls: {
       matchers: {
@@ -20,7 +21,7 @@ const preview: Preview = {
       light: 'light',
       dark: 'dark',
     },
-    defaultTheme: 'light',
+    defaultTheme: 'dark',
   })]
 };
 
