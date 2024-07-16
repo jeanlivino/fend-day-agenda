@@ -1,25 +1,30 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Togglebutton } from "./Togglebutton"
+import type { Meta, StoryObj } from "@storybook/react";
+import { Togglebutton } from "./Togglebutton";
+import { action } from "@storybook/addon-actions";
 
-export type Story = StoryObj<typeof Togglebutton>
+export type Story = StoryObj<typeof Togglebutton>;
 
 const meta: Meta<typeof Togglebutton> = {
-  title: 'Components/Togglebutton',
+  title: "Components/Togglebutton",
   component: Togglebutton,
-} satisfies Meta<typeof Togglebutton>
+  argTypes: {
+    initialMode: { control: "boolean" },
+    onModeChange: { action: "mode changed" },
+  },
+} satisfies Meta<typeof Togglebutton>;
 
 export default meta;
 
-export const Default: Story = {}
-
 export const PlusButton: Story = {
   args: {
-    mode: true
-  }
+    initialMode: true,
+    onModeChange: action("mode changed"),
+  },
 };
 
 export const MinusButton: Story = {
   args: {
-    mode: false
-  }
+    initialMode: false,
+    onModeChange: action("mode changed"),
+  },
 };
