@@ -11,6 +11,8 @@ test("renders SpeakerCard", () => {
       role="Developer"
       tags={["Frontend", "Convida", "Comunidade"]}
       label="Typescript morreu?"
+      hour="10:00"
+      isSaved={true}
     />
   );
   const element = getByText(/Typescript morreu?/i);

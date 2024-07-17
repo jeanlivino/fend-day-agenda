@@ -15,6 +15,8 @@ const meta: Meta<typeof SpeakerCard> = {
     name: { control: "text" },
     role: { control: "text" },
     onChangeMode: { action: "mode changed" },
+    hour: { control: "text" },
+    isSaved: { control: "boolean" },
   },
 } satisfies Meta<typeof SpeakerCard>;
 
@@ -28,5 +30,7 @@ export const Default: Story = {
     imageUrl: "",
     name: "Abraão",
     role: "Developer",
+    hour: "10:00",
+    isSaved: true,
   },
 };
