@@ -7,7 +7,7 @@ export const ProfileCard = ({ name, role, imageUrl, imageFallback }: ProfileCard
   return (
     <div className="flex items-center gap-2">
       <Avatar className="w-10 h-10 rounded-full flex justify-center border border-gray-50 bg-white ">
-        <AvatarImage alt={name} src={imageUrl} />
+        <AvatarImage className="object-cover" alt={name} src={imageUrl} />
         <AvatarFallback className="font-semibold text-lg justify-center items-center flex" >{imageFallback}</AvatarFallback>
       </Avatar>
       <div className="flex flex-col">
