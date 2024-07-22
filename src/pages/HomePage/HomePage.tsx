@@ -7,8 +7,8 @@ import { LinkAgenda } from "@/components/LinkAgenda";
 import { ReturnButton } from "@/components/ReturnButton";
 import { SpeakerCard } from "@/components/SpeakerCard";
 import { useAgenda } from "@/hooks/useAgenda";
-import { Mode } from "@/components/ButtonGroup/ButtonGroup";
 import { useSavedTalks } from "@/hooks/useSavedTalks";
+import { Mode } from "@/components/ButtonGroup/types";
 
 export const HomePage = () => {
   const { data } = useAgenda();
