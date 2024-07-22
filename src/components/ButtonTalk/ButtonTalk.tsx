@@ -1,21 +1,16 @@
 import { Button } from "../ui/button";
-type Props = {
-  children: string | React.ReactNode;
-  active: boolean | void;
-  onModeChange?: (newMode?: boolean) => void;
-};
+import { Props } from "./types";
 
-export const ButtonTalk = ({ children, active = false, onModeChange }: Props) => {
+export const ButtonTalk = ({ children, active = false, mode, onModeChange }: Props) => {
   const handleClick = () => {
-    const newMode = !active;
     if (onModeChange) {
-      onModeChange(newMode);
+      onModeChange(mode);
     }
   };
 
   const buttonColor = active
-    ? "bg-[#A855F7] border-[0.5px] border-[#A855F7] hover:bg-[#A855F7] rounded-[5px] w-[154px]"
-    : "bg-[#832BD8]/[.20] border-[0.5px] border-[#A855F7] hover:bg-[#A855F7] rounded-[5px] w-[154px]";
+    ? "bg-[#A855F7] border-[0.5px] border-[#A855F7] hover:bg-[#A855F7] rounded-[5px] w-full"
+    : "bg-[#832BD8]/[.20] border-[0.5px] border-[#A855F7] hover:bg-[#A855F7] rounded-[5px] w-full";
 
   return (
     <Button className={buttonColor} onClick={handleClick}>

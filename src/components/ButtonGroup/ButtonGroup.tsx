@@ -1,29 +1,21 @@
 import { ButtonTalk } from "../ButtonTalk";
 import { useState } from "react";
+import { Mode, Props } from "./types";
 
-type mode = "frontend" | "convida" | "firebanking" | "firebanking2";
-type props = {
-  onChange?: (mode: mode) => void;
-}
-export const ButtonGroup = (props: props) => {
-  const [mode, setMode] = useState<mode>("frontend");
-  const handleChange = (mode: mode) => {
-    return () => {
-      setMode(mode);
-      if (props.onChange) {
-        props.onChange(mode);
-      }
+export const ButtonGroup = (props: Props) => {
+  const [mode, setMode] = useState<Mode>();
+  const handleChange = (newMode: Mode) => {
+    setMode(newMode);
+    if (props.onChange) {
+      props.onChange(newMode);
     }
-
   }
   return (
-    <div className="flex justify-center
-    gap-4 flex-wrap w-full
-    background-slate-200 h-50">
-      <ButtonTalk children="Front-End CE" active={mode == "frontend"} onModeChange={handleChange("frontend")} />
-      <ButtonTalk children="Convida" active={mode == "convida"} onModeChange={handleChange("convida")} />
-      <ButtonTalk children="Fire Banking" active={mode == "firebanking"} onModeChange={handleChange("firebanking")} />
-      <ButtonTalk children="Fire Banking" active={mode == "firebanking2"} onModeChange={handleChange("firebanking2")} />
+    <div className="grid grid-cols-2 items-center justify-center gap-6 w-full background-slate-200 max-w-[500px]">
+      <ButtonTalk mode="Frontend" children="Front-End CE" active={mode == "Frontend"} onModeChange={handleChange} />
+      <ButtonTalk mode="Invite" children="Convida" active={mode == "Invite"} onModeChange={handleChange} />
+      <ButtonTalk mode="FireBanking" children="Fire Banking" active={mode == "FireBanking"} onModeChange={handleChange} />
+      <ButtonTalk mode="Communities" children="Comunidades" active={mode == "Communities"} onModeChange={handleChange} />
     </div>
   );
 };
