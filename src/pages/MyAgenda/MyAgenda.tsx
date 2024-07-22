@@ -37,15 +37,17 @@ export const MyAgenda = () => {
     <section className="container mt-12 flex flex-col items-center">
       <ReturnButton />
       <Header label="Minha Agenda" />
-
-      <div className="mt-8">
+      <div className="mt-8 w-full max-w-[500px]">
         <LinkAgenda />
       </div>
+      <div className="mt-8 w-full flex justify-center">
       <DeadComponent title={"Abertura"} hours={"8:00"} />
+      </div>
+
       {Object.keys(talksByHour).length > 0 ? (
         Object.keys(talksByHour).map((hour) => (
-          <div key={hour} className="w-full mt-8">
-            <div className="mt-4 flex flex-col items-center gap-3">
+          <div key={hour} className="w-full my-8">
+            <div className="flex flex-col items-center gap-3">
               {talksByHour[hour].map((talk) => (
                 <SpeakerCard
                   key={talk.id}

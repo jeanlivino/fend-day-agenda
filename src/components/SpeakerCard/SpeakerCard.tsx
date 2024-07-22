@@ -1,9 +1,11 @@
+// import { useState, useEffect } from "react";
 import { Separator } from "@radix-ui/react-separator";
 import { ProfileCard } from "../ProfileCard";
 import { Badge } from "../ui/badge";
 import { Card } from "../ui/card";
-import { SpeakerCardProps } from "./types";
 import { ToggleButton } from "../ToggleButton";
+import { SpeakerCardProps } from "./types";
+// import { RatingButton } from "../RattingButton";
 
 export const SpeakerCard = ({
   label,
@@ -16,6 +18,17 @@ export const SpeakerCard = ({
   isSaved,
   onChangeMode,
 }: SpeakerCardProps) => {
+ /*  const [isPast, setIsPast] = useState(false);
+
+  useEffect(() => {
+    const now = new Date();
+    const [hourValue, minuteValue] = hour.split(":").map(Number);
+    const eventTime = new Date(now);
+    eventTime.setHours(hourValue, minuteValue, 0, 0);
+
+    setIsPast(now > eventTime);
+  }, [hour]); */
+
   const handleToggleSave = () => {
     onChangeMode(!isSaved);
   };
@@ -48,6 +61,7 @@ export const SpeakerCard = ({
           imageUrl={imageUrl}
           imageFallback={imageFallback}
         />
+      {/*   {isPast && <RatingButton label={"8:00 PM"} ratingLink={"link"}  />} */}
       </div>
     </Card>
   );
