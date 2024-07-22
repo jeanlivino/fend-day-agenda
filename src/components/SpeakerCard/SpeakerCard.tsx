@@ -16,9 +16,12 @@ export const SpeakerCard = ({
   role,
   hour,
   isSaved,
+  keynote,
+  showRoom,
+  room,
   onChangeMode,
 }: SpeakerCardProps) => {
- /*  const [isPast, setIsPast] = useState(false);
+  /*  const [isPast, setIsPast] = useState(false);
 
   useEffect(() => {
     const now = new Date();
@@ -35,10 +38,23 @@ export const SpeakerCard = ({
 
   return (
     <Card className="max-w-[500px] p-5 w-full flex items-start flex-col justify-center bg-transparent border gap-4 border-[#D9B1FF] rounded-lg ">
+      {showRoom && room && (
+        <span className="w-full text-[#E6D5F7] bg-[#261537] text-sm px-4 py-2 rounded-lg">
+          Trilha: <b>{room}</b>
+        </span>
+      )}
       <div className="flex gap-3 justify-between items-start w-full">
         <span className="text-[#A190B2] text-sm">{hour}</span>
         <h1 className="text-[#E6D5F7] mt-0 pt-0 w-full text-wrap whitespace-normal text-base break-words">
           {label}
+          {keynote && (
+            <Badge
+              variant="outline"
+              className="bg-[#A855F7] text-white font-thin rounded-lg ml-1"
+            >
+              Keynote
+            </Badge>
+          )}
         </h1>
         <ToggleButton isSaved={isSaved} onToggle={handleToggleSave} />
       </div>
@@ -61,7 +77,7 @@ export const SpeakerCard = ({
           imageUrl={imageUrl}
           imageFallback={imageFallback}
         />
-      {/*   {isPast && <RatingButton label={"8:00 PM"} ratingLink={"link"}  />} */}
+        {/*   {isPast && <RatingButton label={"8:00 PM"} ratingLink={"link"}  />} */}
       </div>
     </Card>
   );

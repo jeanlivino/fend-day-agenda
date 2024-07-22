@@ -2,8 +2,12 @@ import { SpeakerCard } from "@/components/SpeakerCard";
 import { Button } from "@/components/ui/button";
 import { SpeakerSectionProps } from "./types";
 
-export const SpeakerSection = ({ sectionTitle, liveTalk, savedCardIds, handleCardModeChange }: SpeakerSectionProps) => {
-
+export const SpeakerSection = ({
+  sectionTitle,
+  liveTalk,
+  savedCardIds,
+  handleCardModeChange,
+}: SpeakerSectionProps) => {
   return (
     <section className="w-full">
       {liveTalk && (
@@ -23,6 +27,7 @@ export const SpeakerSection = ({ sectionTitle, liveTalk, savedCardIds, handleCar
               imageFallback={liveTalk.speaker.title[0]}
               name={liveTalk.speaker.title}
               role={liveTalk.speaker.role}
+              keynote={liveTalk.keynote}
             />
           </div>
         </div>

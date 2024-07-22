@@ -16,6 +16,9 @@ const meta: Meta<typeof SpeakerCard> = {
     role: { control: "text" },
     onChangeMode: { action: "mode changed" },
     hour: { control: "text" },
+    keynote: { control: "boolean" },
+    showRoom: { control: "boolean" },
+    room: { control: "text" },
     isSaved: { control: "boolean" },
   },
 } satisfies Meta<typeof SpeakerCard>;
@@ -31,6 +34,9 @@ export const Default: Story = {
     name: "Abraão",
     role: "Developer",
     hour: "10:00",
+    keynote: false,
+    showRoom: false,
+    room: "Test Room",
     isSaved: true,
   },
 };

@@ -1,9 +1,5 @@
-import { getAgenda } from '@/api';
-import {useQuery} from 'react-query';
+import { getAgenda } from "@/api";
+import { useQuery } from "react-query";
 
-
-export const useAgenda = () =>{
-  const data = useQuery(['agenda'], {queryFn: getAgenda, staleTime: Infinity});
-
-  return data;
-}
+export const useAgenda = () =>
+  useQuery(["agenda"], { queryFn: getAgenda, staleTime: Infinity });
