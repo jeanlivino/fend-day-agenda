@@ -1,5 +1,5 @@
 import { Palestra } from "@/api/types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ButtonGroup } from "@/components/ButtonGroup";
 import { DeadComponent } from "@/components/DeadComponent";
 import { Header } from "@/components/Header";
@@ -26,11 +26,14 @@ export const HomePage = () => {
     .sort((a, b) => a.hour.localeCompare(b.hour));
 
   const filteredTalks = allTalks.filter(
-    (talk) => !currentMode || talk.room === currentMode.toLowerCase(),
+    (talk) => !currentMode || talk.room === currentMode.toLowerCase()
   );
 
-  const { talksBeforeMidDay, talksAfterMidDay } =
-    splitTalksToMidDay(filteredTalks);
+  const { talksBeforeMidDay, talksAfterMidDay } = splitTalksToMidDay(filteredTalks);
+
+  useEffect(() => {
+    document.title = "Agenda do Evento";
+  }, []);
 
   return (
     <section className="container my-12 flex flex-col items-center">

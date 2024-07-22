@@ -8,6 +8,6 @@ test('renders LinkAgenda', () => {
       <LinkAgenda />
     </Router>
   );
-  const element = getByText(/Acontecendo agora/i);
+  const element = getByText(/Ver minha agenda/i);
   expect(element).toBeInTheDocument();
 });

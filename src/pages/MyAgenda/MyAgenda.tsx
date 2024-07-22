@@ -6,7 +6,7 @@ import { SpeakerCard } from "@/components/SpeakerCard";
 import { useAgenda } from "@/hooks/useAgenda";
 import { useSavedTalks } from "@/hooks/useSavedTalks";
 import { agendaResponseToTalks, splitTalksToMidDay } from "@/lib/talks";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 
 export const MyAgenda = () => {
@@ -28,6 +28,10 @@ export const MyAgenda = () => {
     splitTalksToMidDay(savedTalks);
 
   const hasSavedTalks = useMemo(() => savedTalks.length > 0, [savedTalks]);
+
+  useEffect(() => {
+    document.title = "Minha Agenda";
+  })
 
   return (
     <section className="container mt-12 flex flex-col items-center">

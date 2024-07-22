@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { useAgenda } from "@/hooks/useAgenda";
 import { useSavedTalks } from "@/hooks/useSavedTalks";
 import { getLiveTalk, getNextTalk } from "./utils/talks";
+import { useEffect } from "react";
 
 export const LivePage = () => {
   const { data } = useAgenda();
@@ -18,6 +19,10 @@ export const LivePage = () => {
   const nextFrontendTalk = getNextTalk(data?.Frontend || [], now);
   const nextComunidadesTalk = getNextTalk(data?.Comunidades || [], now);
   const nextConvidadosTalk = getNextTalk(data?.Convida || [], now);
+
+  useEffect(() => {
+    document.title = "Acontecendo agora";
+  }, []);
 
   return (
     <section className="container mt-12 flex flex-col items-center">
