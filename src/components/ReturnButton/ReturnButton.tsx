@@ -1,15 +1,27 @@
 // src/components/ReturnButton/ReturnButton.tsx
-import { Link } from 'react-router-dom';
-import { ChevronLeft } from 'lucide-react';
+import { useLocation, useNavigate } from "react-router-dom";
+import { ChevronLeft } from "lucide-react";
 
 export const ReturnButton = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const onReturnClick = () => {
+    if (location.pathname === "/") {
+      window.location.href = "https://frontendday.com.br/";
+      return;
+    }
+
+    navigate(-1);
+  };
+
   return (
     <>
-      <Link to="/" className="self-start">
+      <a onClick={onReturnClick} className="self-start">
         <ChevronLeft size={28} className="text-[#A855F7] self-start absolute" />
-      </Link>
+      </a>
     </>
   );
-}
+};
 
 export default ReturnButton;
