@@ -14,7 +14,7 @@ export const LinkAgenda = ({ isMyAgenda }: { isMyAgenda?: boolean }) => {
           Agenda completa
         </Link>
       ) : (
-        <Link className={linkCN} to="/agenda">
+        <Link className={linkCN} to="/minha-lista">
           Ver minha agenda &gt;
         </Link>
       )}
