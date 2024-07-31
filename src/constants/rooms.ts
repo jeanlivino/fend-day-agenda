@@ -1,15 +1,15 @@
 export const roomKeysMap = {
-  convida: {
-    label: "Convida",
-  },
   fendce: {
     label: "Frontend",
+  },
+  w3c: {
+    label: "W3C / NiC.br",
   },
   firebank: {
     label: "Fire Banking",
   },
-  w3c: {
-    label: "W3C / NiC.br",
+  convida: {
+    label: "Convida",
   },
 } as const;
 
