@@ -6,7 +6,6 @@ export interface Agenda extends Record<TalkCategory, Palestra[]> {
 
 export interface Palestra {
   speaker: Speaker;
-  keynote?: boolean;
   room: string;
   hour: string;
   id: number;
@@ -22,6 +21,7 @@ export interface Speaker {
   role: string;
   company: string;
   bio: string;
+  keynote?: boolean;
   social_link: string;
   id: number;
   title: string;

@@ -5,20 +5,17 @@ import { Badge } from "../ui/badge";
 import { Card } from "../ui/card";
 import { ToggleButton } from "../ToggleButton";
 import { SpeakerCardProps } from "./types";
+import { RoomKeys, roomKeysMap } from "@/constants/rooms";
 // import { RatingButton } from "../RattingButton";
 
 export const SpeakerCard = ({
   label,
   tags,
-  imageFallback,
-  imageUrl,
-  name,
-  role,
   hour,
   isSaved,
-  keynote,
   showRoom,
   room,
+  speaker,
   onChangeMode,
 }: SpeakerCardProps) => {
   /*  const [isPast, setIsPast] = useState(false);
@@ -40,18 +37,16 @@ export const SpeakerCard = ({
     <Card className="max-w-[500px] p-5 w-full flex items-start flex-col justify-center bg-transparent border gap-4 border-[#D9B1FF] rounded-lg ">
       {showRoom && room && (
         <span className="w-full text-[#E6D5F7] bg-[#261537] text-sm px-4 py-2 rounded-lg">
-          Trilha: <b>{room}</b>
+          Trilha:{" "}
+          <b>{room in roomKeysMap ? roomKeysMap[room as RoomKeys].label : "Trilha desconhecida"}</b>
         </span>
       )}
       <div className="flex gap-3 justify-between items-start w-full">
         <span className="text-[#A190B2] text-sm">{hour}</span>
         <h1 className="text-[#E6D5F7] mt-0 pt-0 w-full text-wrap whitespace-normal text-base break-words">
           {label}
-          {keynote && (
-            <Badge
-              variant="outline"
-              className="bg-[#A855F7] text-white font-thin rounded-lg ml-1"
-            >
+          {speaker?.keynote && (
+            <Badge variant="outline" className="bg-[#A855F7] text-white font-thin rounded-lg ml-1">
               Keynote
             </Badge>
           )}
@@ -59,7 +54,7 @@ export const SpeakerCard = ({
         <ToggleButton isSaved={isSaved} onToggle={handleToggleSave} />
       </div>
       <div className="flex gap-2 w-full justify-start overflow-x-auto scrollbar-cards [&::-webkit-scrollbar]:hidden">
-        {tags.map((tag: string, index) => (
+        {(tags || ["teste", "teste2"]).map((tag: string, index) => (
           <Badge
             key={index}
             variant="outline"
@@ -69,16 +64,19 @@ export const SpeakerCard = ({
           </Badge>
         ))}
       </div>
-      <div className=" flex-cols p-2  w-full">
-        <Separator className="w-full h-[0.3px] mb-4 bg-[#D9B1FF] rounded-xl" />
-        <ProfileCard
-          name={name}
-          role={role}
-          imageUrl={imageUrl}
-          imageFallback={imageFallback}
-        />
-        {/*   {isPast && <RatingButton label={"8:00 PM"} ratingLink={"link"}  />} */}
-      </div>
+      {speaker?.title && (
+        <div className=" flex-cols p-2  w-full">
+          <Separator className="w-full h-[0.3px] mb-4 bg-[#D9B1FF] rounded-xl" />
+          <ProfileCard
+            name={speaker.title}
+            role={speaker.role}
+            imageUrl={speaker.image}
+            imageFallback={speaker.title[0]}
+            company={speaker.company}
+          />
+          {/*   {isPast && <RatingButton label={"8:00 PM"} ratingLink={"link"}  />} */}
+        </div>
+      )}
     </Card>
   );
 };

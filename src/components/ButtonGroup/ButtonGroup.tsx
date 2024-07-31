@@ -1,10 +1,11 @@
 import { ButtonTalk } from "../ButtonTalk";
 import { useState } from "react";
-import { Mode, Props } from "./types";
+import { Props } from "./types";
+import { roomKeys, RoomKeys, roomKeysMap } from "@/constants/rooms";
 
 export const ButtonGroup = (props: Props) => {
-  const [talk, setTalk] = useState<Mode>();
-  const handleChange = (newMode: Mode) => {
+  const [talk, setTalk] = useState<RoomKeys>();
+  const handleChange = (newMode: RoomKeys) => {
     setTalk(newMode);
     if (props.onChange) {
       props.onChange(newMode);
@@ -12,30 +13,15 @@ export const ButtonGroup = (props: Props) => {
   };
   return (
     <div className="grid grid-cols-2 items-center justify-center gap-3 w-full background-slate-200 max-w-[500px]">
-      <ButtonTalk
-        mode="Frontend"
-        children="Front-End CE"
-        active={talk == "Frontend"}
-        onModeChange={handleChange}
-      />
-      <ButtonTalk
-        mode="Invite"
-        children="Convida"
-        active={talk == "Invite"}
-        onModeChange={handleChange}
-      />
-      <ButtonTalk
-        mode="FireBanking"
-        children="Fire Banking"
-        active={talk == "FireBanking"}
-        onModeChange={handleChange}
-      />
-      <ButtonTalk
-        mode="Communities"
-        children="Comunidades"
-        active={talk == "Communities"}
-        onModeChange={handleChange}
-      />
+      {roomKeys.map((roomKey) => (
+        <ButtonTalk
+          key={roomKey}
+          mode={roomKey}
+          children={roomKeysMap[roomKey].label}
+          active={talk == roomKey}
+          onModeChange={handleChange}
+        />
+      ))}
     </div>
   );
 };

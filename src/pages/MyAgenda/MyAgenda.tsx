@@ -24,14 +24,13 @@ export const MyAgenda = () => {
       .sort((a, b) => a.hour.localeCompare(b.hour));
   }, [allTalks, savedCardIds]);
 
-  const { talksBeforeMidDay, talksAfterMidDay } =
-    splitTalksToMidDay(savedTalks);
+  const { talksBeforeMidDay, talksAfterMidDay } = splitTalksToMidDay(savedTalks);
 
   const hasSavedTalks = useMemo(() => savedTalks.length > 0, [savedTalks]);
 
   useEffect(() => {
     document.title = "Minha Agenda";
-  })
+  });
 
   return (
     <section className="container mt-12 flex flex-col items-center">
@@ -60,12 +59,8 @@ export const MyAgenda = () => {
               hour={talk.hour}
               label={talk.title}
               tags={talk.tags}
-              imageUrl={talk.speaker.image}
-              imageFallback={talk.speaker.title[0]}
-              name={talk.speaker.title}
-              role={talk.speaker.role}
+              speaker={talk.speaker}
               room={talk.room}
-              keynote={talk.keynote}
               showRoom
               isSaved
               onChangeMode={() => toggleSaveCard(talk.id)}
@@ -79,12 +74,8 @@ export const MyAgenda = () => {
               hour={talk.hour}
               label={talk.title}
               tags={talk.tags}
-              imageUrl={talk.speaker.image}
-              imageFallback={talk.speaker.title[0]}
-              name={talk.speaker.title}
-              role={talk.speaker.role}
+              speaker={talk.speaker}
               room={talk.room}
-              keynote={talk.keynote}
               showRoom
               isSaved
               onChangeMode={() => toggleSaveCard(talk.id)}
