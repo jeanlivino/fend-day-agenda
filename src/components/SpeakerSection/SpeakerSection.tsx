@@ -23,11 +23,7 @@ export const SpeakerSection = ({
               hour={liveTalk.hour}
               label={liveTalk.title}
               tags={liveTalk.tags}
-              imageUrl={liveTalk.speaker.image}
-              imageFallback={liveTalk.speaker.title[0]}
-              name={liveTalk.speaker.title}
-              role={liveTalk.speaker.role}
-              keynote={liveTalk.keynote}
+              speaker={liveTalk.speaker}
             />
           </div>
         </div>

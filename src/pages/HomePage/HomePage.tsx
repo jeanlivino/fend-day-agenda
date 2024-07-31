@@ -8,18 +8,17 @@ import { ReturnButton } from "@/components/ReturnButton";
 import { SpeakerCard } from "@/components/SpeakerCard";
 import { useAgenda } from "@/hooks/useAgenda";
 import { useSavedTalks } from "@/hooks/useSavedTalks";
-import { Mode } from "@/components/ButtonGroup/types";
 import { splitTalksToMidDay } from "@/lib/talks";
+import { RoomKeys, roomKeys } from "@/constants/rooms";
+import { LoaderCircle } from "lucide-react";
 
 export const HomePage = () => {
-  const { data } = useAgenda();
+  const { data, isLoading } = useAgenda();
   const { savedCardIds, toggleSaveCard } = useSavedTalks();
 
-  const [currentMode, setCurrentMode] = useState<Mode | undefined>(undefined);
+  const [currentMode, setCurrentMode] = useState<RoomKeys | undefined>(undefined);
 
-  const keys = ["Frontend", "Convida", "FireBanking", "Comunidades"];
-
-  const allTalks = keys
+  const allTalks = roomKeys
     .reduce((acc: Palestra[], key) => {
       return acc.concat(data?.[key] || []);
     }, [])
@@ -42,49 +41,50 @@ export const HomePage = () => {
       <div className="mt-8 w-full max-w-[500px]">
         <LinkAgenda />
       </div>
-      <div className="my-8 w-full flex justify-center">
-        <ButtonGroup onChange={setCurrentMode} />
-      </div>
 
-      <div className="space-y-4">
-        <DeadComponent title="Abertura" hours="8:00" />
-        {talksBeforeMidDay.map((talk) => (
-          <SpeakerCard
-            key={talk.id}
-            hour={talk.hour}
-            label={talk.title}
-            tags={talk.tags}
-            imageUrl={talk.speaker.image}
-            imageFallback={talk.speaker.title[0]}
-            name={talk.speaker.title}
-            role={talk.speaker.role}
-            room={talk.room}
-            keynote={talk.keynote}
-            showRoom={!currentMode}
-            isSaved={savedCardIds.includes(talk.id)}
-            onChangeMode={() => toggleSaveCard(talk.id)}
-          />
-        ))}
-        <DeadComponent title="Almoço" hours="12:00" />
-        {talksAfterMidDay.map((talk) => (
-          <SpeakerCard
-            key={talk.id}
-            hour={talk.hour}
-            label={talk.title}
-            tags={talk.tags}
-            imageUrl={talk.speaker.image}
-            imageFallback={talk.speaker.title[0]}
-            name={talk.speaker.title}
-            role={talk.speaker.role}
-            room={talk.room}
-            keynote={talk.keynote}
-            showRoom={!currentMode}
-            isSaved={savedCardIds.includes(talk.id)}
-            onChangeMode={() => toggleSaveCard(talk.id)}
-          />
-        ))}
-        <DeadComponent title="Encerramento" hours="18:00" />
-      </div>
+      {isLoading ? (
+        <div className="my-8 w-full flex justify-center">
+          <LoaderCircle color="#A855F7" className="animate-spin w-16 h-16" />
+        </div>
+      ) : (
+        <>
+          <div className="my-8 w-full flex justify-center">
+            <ButtonGroup onChange={setCurrentMode} />
+          </div>
+
+          <div className="space-y-4 w-full max-w-[500px]">
+            <DeadComponent title="Abertura" hours="8:00" />
+            {talksBeforeMidDay.map((talk) => (
+              <SpeakerCard
+                key={talk.id}
+                hour={talk.hour}
+                label={talk.title}
+                tags={talk.tags}
+                speaker={talk.speaker}
+                room={talk.room}
+                showRoom={!currentMode}
+                isSaved={savedCardIds.includes(talk.id)}
+                onChangeMode={() => toggleSaveCard(talk.id)}
+              />
+            ))}
+            <DeadComponent title="Almoço" hours="12:00" />
+            {talksAfterMidDay.map((talk) => (
+              <SpeakerCard
+                key={talk.id}
+                hour={talk.hour}
+                label={talk.title}
+                tags={talk.tags}
+                room={talk.room}
+                speaker={talk.speaker}
+                showRoom={!currentMode}
+                isSaved={savedCardIds.includes(talk.id)}
+                onChangeMode={() => toggleSaveCard(talk.id)}
+              />
+            ))}
+            <DeadComponent title="Encerramento" hours="18:00" />
+          </div>
+        </>
+      )}
     </section>
   );
 };

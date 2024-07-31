@@ -1,5 +1,5 @@
-export type Mode = "Frontend" | "Invite" | "FireBanking" | "Communities";
+import { RoomKeys } from "@/constants/rooms";
 
 export interface Props {
-  onChange?: (mode: Mode) => void;
+  onChange?: (mode: RoomKeys) => void;
 }
