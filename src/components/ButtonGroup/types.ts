@@ -1,5 +1,5 @@
 import { RoomKeys } from "@/constants/rooms";
 
 export interface Props {
-  onChange?: (mode: RoomKeys) => void;
+  onChange?: (mode?: RoomKeys) => void;
 }
