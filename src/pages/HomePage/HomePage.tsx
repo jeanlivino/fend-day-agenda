@@ -81,7 +81,7 @@ export const HomePage = () => {
                 onChangeMode={() => toggleSaveCard(talk.id)}
               />
             ))}
-            <DeadComponent title="ENCERRAMENTO / PREMIAÇÃO W3C" hours="19:50" />
+            <DeadComponent title="Encerramento / Premiação W3C" hours="19:50" />
           </div>
         </>
       )}
