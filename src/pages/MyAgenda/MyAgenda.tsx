@@ -82,7 +82,7 @@ export const MyAgenda = () => {
             />
           ))}
 
-          <DeadComponent title={"Encerramento"} hours={"18:00"} />
+          <DeadComponent title="ENCERRAMENTO / PREMIAÇÃO W3C" hours="19:50" />
         </div>
       )}
     </section>
