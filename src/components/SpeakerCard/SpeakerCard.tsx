@@ -53,8 +53,8 @@ export const SpeakerCard = ({
         </h1>
         <ToggleButton isSaved={isSaved} onToggle={handleToggleSave} />
       </div>
-      <div className="flex gap-2 w-full justify-start overflow-x-auto scrollbar-cards [&::-webkit-scrollbar]:hidden">
-        {(tags || ["teste", "teste2"]).map((tag: string, index) => (
+      <div className="flex gap-2 w-full justify-start flex-wrap">
+        {tags.map((tag: string, index) => (
           <Badge
             key={index}
             variant="outline"
