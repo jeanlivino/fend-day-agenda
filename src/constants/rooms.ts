@@ -9,7 +9,7 @@ export const roomKeysMap = {
     label: "Fire Banking",
   },
   convida: {
-    label: "Convida",
+    label: "OPovo Convida",
   },
 } as const;
 
