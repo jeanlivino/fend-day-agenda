@@ -15,9 +15,9 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        assetFileNames: "agenda/assets/[name].[hash][extname]",
-        chunkFileNames: "agenda/[name].[hash].js",
-        entryFileNames: "agenda/[name].[hash].js",
+        assetFileNames: "assets/[name].[hash][extname]",
+        chunkFileNames: "[name].[hash].js",
+        entryFileNames: "[name].[hash].js",
       },
     },
   },
