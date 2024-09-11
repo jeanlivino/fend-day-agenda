@@ -12,13 +12,26 @@ export const LivePage = () => {
   const { savedCardIds, toggleSaveCard } = useSavedTalks();
   const now = new Date();
 
-  const liveFrontendTalk = getLiveTalk(data?.Frontend || [], now);
-  const liveConvidadosTalk = getLiveTalk(data?.Convida || [], now);
-  const liveComunidadesTalk = getLiveTalk(data?.Comunidades || [], now);
+  const fendTalks = {
+    live: getLiveTalk(data?.fendce || []),
+    next: getNextTalk(data?.fendce || [], now),
+  };
 
-  const nextFrontendTalk = getNextTalk(data?.Frontend || [], now);
-  const nextComunidadesTalk = getNextTalk(data?.Comunidades || [], now);
-  const nextConvidadosTalk = getNextTalk(data?.Convida || [], now);
+  const w3cTalks = {
+    live: getLiveTalk(data?.w3c || []),
+    next: getNextTalk(data?.w3c || [], now),
+  };
+
+  const firebankTalks = {
+    live: getLiveTalk(data?.firebank || []),
+    next: getNextTalk(data?.firebank || [], now),
+  };
+
+  const convidaTalks = {
+    live: getLiveTalk(data?.convida || []),
+    next: getNextTalk(data?.convida || [], now),
+  };
+
 
   useEffect(() => {
     document.title = "Acontecendo agora";
@@ -26,64 +39,64 @@ export const LivePage = () => {
 
   return (
     <section className="container mt-12 flex flex-col items-center">
-      <ReturnButton/>
+      <ReturnButton />
       <Header label="Agenda do Evento" />
       <h2 className="text-white text-center mt-8 text-xl font-semibold">
         Acontecendo agora:
       </h2>
-      {liveFrontendTalk || liveConvidadosTalk || liveComunidadesTalk ? (
-        <>
-          <SpeakerSection
-            handleCardModeChange={toggleSaveCard}
-            liveTalk={liveFrontendTalk}
-            savedCardIds={savedCardIds}
-            sectionTitle="Front-End CE"
-          />
-          <SpeakerSection
-            handleCardModeChange={toggleSaveCard}
-            liveTalk={liveConvidadosTalk}
-            savedCardIds={savedCardIds}
-            sectionTitle="Convida"
-          />
-          <SpeakerSection
-            handleCardModeChange={toggleSaveCard}
-            liveTalk={liveComunidadesTalk}
-            savedCardIds={savedCardIds}
-            sectionTitle="Comunidades"
-          />
-        </>
-      ) : (
+      <SpeakerSection
+        handleCardModeChange={toggleSaveCard}
+        liveTalk={fendTalks.live}
+        savedCardIds={savedCardIds}
+      />
+      <SpeakerSection
+        handleCardModeChange={toggleSaveCard}
+        liveTalk={w3cTalks.live}
+        savedCardIds={savedCardIds}
+      />
+      <SpeakerSection
+        handleCardModeChange={toggleSaveCard}
+        liveTalk={firebankTalks.live}
+        savedCardIds={savedCardIds}
+      />
+      <SpeakerSection
+        handleCardModeChange={toggleSaveCard}
+        liveTalk={convidaTalks.live}
+        savedCardIds={savedCardIds}
+      />
+      {
+        !fendTalks.live && !w3cTalks.live && !firebankTalks.live && !convidaTalks.live &&
         <p className="text-white text-center mt-4">
-          Se avexe não, já já tem mais! 🙂 🥳
-        </p>
-      )}
+          Se avexe não, já já as talks começam! 🙂 🥳
+        </p>}
       <Separator className="w-20 mt-8 h-1 rounded-2xl self-center bg-[#7c3aed]" />
       <section className="mb-12 mt-8">
         <h3 className="text-xl font-semibold text-center text-white">
           Próximas Talks
         </h3>
-        {nextFrontendTalk || nextConvidadosTalk || nextComunidadesTalk ? (
-          <>
-            <SpeakerSection
-              handleCardModeChange={toggleSaveCard}
-              liveTalk={nextFrontendTalk}
-              savedCardIds={savedCardIds}
-              sectionTitle="Front-End CE"
-            />
-            <SpeakerSection
-              handleCardModeChange={toggleSaveCard}
-              liveTalk={nextConvidadosTalk}
-              savedCardIds={savedCardIds}
-              sectionTitle="Convida"
-            />
-            <SpeakerSection
-              handleCardModeChange={toggleSaveCard}
-              liveTalk={nextComunidadesTalk}
-              savedCardIds={savedCardIds}
-              sectionTitle="Comunidades"
-            />
-          </>
-        ) : (
+
+        <SpeakerSection
+          handleCardModeChange={toggleSaveCard}
+          liveTalk={fendTalks.next}
+          savedCardIds={savedCardIds}
+        />
+        <SpeakerSection
+          handleCardModeChange={toggleSaveCard}
+          liveTalk={w3cTalks.next}
+          savedCardIds={savedCardIds}
+        />
+        <SpeakerSection
+          handleCardModeChange={toggleSaveCard}
+          liveTalk={firebankTalks.next}
+          savedCardIds={savedCardIds}
+        />
+        <SpeakerSection
+          handleCardModeChange={toggleSaveCard}
+          liveTalk={convidaTalks.next}
+          savedCardIds={savedCardIds}
+        />
+
+        {!fendTalks.next && !w3cTalks.next && !firebankTalks.next && !convidaTalks.next && (
           <p className="text-white text-center mt-4">
             Fique ligado, as próximas talks estão chegando!
           </p>

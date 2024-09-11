@@ -1,8 +1,8 @@
 export type TalkCategory = "Convida" | "Frontend" | "Comunidades";
 
-export interface Agenda extends Record<TalkCategory, Palestra[]> {
-  [type: string]: Palestra[];
-}
+export type Room = "fendce" | "w3c" | "firebank" | "convida";
+
+export interface Agenda extends Record<Room, Palestra[]> {}
 
 export interface Palestra {
   speaker: Speaker;
