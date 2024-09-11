@@ -5,6 +5,7 @@ import './index.css'
 import {QueryClientProvider, QueryClient} from 'react-query';
 import PWABadge from "./components/PWABadge/index.tsx";
 import PWAIOSPrompt from 'react-ios-pwa-prompt'
+import { Toaster } from "./components/ui/toaster.tsx";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         timesToShow={10}
         appIconPath="/apple-touch-icon-180x180.png"
       />
+      <Toaster />
     </QueryClientProvider>
   </React.StrictMode>,
 )

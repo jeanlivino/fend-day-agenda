@@ -1,4 +1,5 @@
-import { CircleMinus, CirclePlus } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { Button } from "../ui/button";
 
 type ToggleButtonProps = {
   isSaved: boolean;
@@ -6,9 +7,26 @@ type ToggleButtonProps = {
 };
 
 export const ToggleButton = ({ isSaved, onToggle }: ToggleButtonProps) => {
+  const { toast } = useToast();
+
+  const handleClick = () => {
+    onToggle(!isSaved);
+
+    toast({
+      title: isSaved ? 'Adicionado à agenda com sucesso': 'Removido da agenda com sucesso',
+    })
+  };
+
   return (
-    <div data-testid="toggleButton" onClick={() => onToggle(!isSaved)}>
-      {isSaved ? ( <CircleMinus color="#ffffff" /> ) : ( <CirclePlus color="#ffffff" /> )}
-    </div>
+    <Button
+      size="sm"
+      onClick={handleClick}
+      variant={
+        isSaved ? 'outline' : 'secondary'
+      } className="w-full">
+      {isSaved ?
+        'Adicionar à agenda'
+        : 'Remover da agenda'}
+    </Button>
   );
 };

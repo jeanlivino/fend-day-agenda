@@ -51,7 +51,6 @@ export const SpeakerCard = ({
             </Badge>
           )}
         </h1>
-        <ToggleButton isSaved={isSaved} onToggle={handleToggleSave} />
       </div>
       <div className="flex gap-2 w-full justify-start flex-wrap">
         {tags.map((tag: string, index) => (
@@ -77,6 +76,8 @@ export const SpeakerCard = ({
           {/*   {isPast && <RatingButton label={"8:00 PM"} ratingLink={"link"}  />} */}
         </div>
       )}
+        <ToggleButton isSaved={isSaved} onToggle={handleToggleSave} />
+
     </Card>
   );
 };
