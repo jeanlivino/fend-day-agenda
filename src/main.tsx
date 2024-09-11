@@ -18,7 +18,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         copyDescription="Este site tem funcionalidade de app. Adicione-o à sua tela inicial para usar em tela cheia e offline."
         copyShareStep="Pressione o botão 'Compartilhar' no menu abaixo"
         copyAddToHomeScreenStep="Pressione 'Adicionar à tela de início'"
-        timesToShow={105}
+        promptOnVisit={1}
+        timesToShow={10}
       />
     </QueryClientProvider>
   </React.StrictMode>,
