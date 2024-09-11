@@ -18,7 +18,7 @@ test('renders SpeakerComponent', () => {
       id: 1,
     },
   };
-  const { getByText } = render(<SpeakerSection handleCardModeChange={() => {}} liveTalk={liveTalk} savedCardIds={[]} sectionTitle="Test Section" />);
-  const element = getByText(/Test Section/i);
+  const { getByText } = render(<SpeakerSection handleCardModeChange={() => { }} liveTalk={liveTalk} savedCardIds={[]} />);
+  const element = getByText(/Test Talk/i);
   expect(element).toBeInTheDocument();
 });

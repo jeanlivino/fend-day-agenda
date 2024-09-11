@@ -11,7 +11,6 @@ const meta: Meta<typeof SpeakerSection> = {
     handleCardModeChange: { action: "handleCardModeChange" },
     liveTalk: { control: "object" },
     savedCardIds: { control: undefined },
-    sectionTitle: { control: "text" },
   },
 } satisfies Meta<typeof SpeakerSection>;
 
@@ -36,7 +35,6 @@ export const FrontEndCE: Story = {
       },
     },
     savedCardIds: [],
-    sectionTitle: "Front-End CE",
   },
 };
 
@@ -59,7 +57,6 @@ export const Comunidade: Story = {
       },
     },
     savedCardIds: [],
-    sectionTitle: "Comunidade",
   },
 };
 
@@ -82,6 +79,5 @@ export const Convida: Story = {
       },
     },
     savedCardIds: [],
-    sectionTitle: "Convida",
   },
 };
