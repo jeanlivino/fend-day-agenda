@@ -6,7 +6,9 @@ import { Card } from "../ui/card";
 import { ToggleButton } from "../ToggleButton";
 import { SpeakerCardProps } from "./types";
 import { RoomKeys, roomKeysMap } from "@/constants/rooms";
-// import { RatingButton } from "../RattingButton";
+import { RatingButton } from "../RattingButton";
+import { hasTimePassed } from "@/lib/check-date-time";
+import { useMemo } from "react";
 
 export const SpeakerCard = ({
   label,
@@ -18,16 +20,7 @@ export const SpeakerCard = ({
   speaker,
   onChangeMode,
 }: SpeakerCardProps) => {
-  /*  const [isPast, setIsPast] = useState(false);
-
-  useEffect(() => {
-    const now = new Date();
-    const [hourValue, minuteValue] = hour.split(":").map(Number);
-    const eventTime = new Date(now);
-    eventTime.setHours(hourValue, minuteValue, 0, 0);
-
-    setIsPast(now > eventTime);
-  }, [hour]); */
+  const hasPassed = useMemo(() => hasTimePassed(hour), [hour]);
 
   const handleToggleSave = () => {
     onChangeMode(!isSaved);
@@ -73,10 +66,10 @@ export const SpeakerCard = ({
             imageFallback={speaker.title[0]}
             company={speaker.company}
           />
-          {/*   {isPast && <RatingButton label={"8:00 PM"} ratingLink={"link"}  />} */}
         </div>
       )}
-        <ToggleButton isSaved={isSaved} onToggle={handleToggleSave} />
+      {hasPassed && <RatingButton label="Avaliar Palestra" ratingLink={`https://avaliacao.frontendday.com.br/${room}`}/>}
+       {!hasPassed&& <ToggleButton isSaved={isSaved} onToggle={handleToggleSave} />}
 
     </Card>
   );
