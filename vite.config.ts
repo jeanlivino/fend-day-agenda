@@ -17,7 +17,7 @@ export default defineConfig({
 
     manifest: {
       name: 'Agenda FrontEnd Day 2024',
-      short_name: 'frontend-day-agenda',
+      short_name: 'Agenda FrontEnd Day 2024',
       description: 'Monte a sua agenda de palestras do FrontEnd Day 2024',
       theme_color: '#0f172a',
     },

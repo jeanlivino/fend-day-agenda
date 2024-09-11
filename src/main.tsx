@@ -20,6 +20,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         copyAddToHomeScreenStep="Pressione 'Adicionar à tela de início'"
         promptOnVisit={1}
         timesToShow={10}
+        appIconPath="/apple-touch-icon-180x180.png"
       />
     </QueryClientProvider>
   </React.StrictMode>,
