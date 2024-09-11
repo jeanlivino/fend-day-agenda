@@ -1,5 +1,6 @@
 import { useRegisterSW } from "virtual:pwa-register/react";
 import './PWABadge.css'
+import { RefreshCcw } from "lucide-react";
 
 
 function PWABadge() {
@@ -47,8 +48,9 @@ function PWABadge() {
                 </span>}
           </div>
           <div className="PWABadge-buttons">
-            { needRefresh && <button className="PWABadge-toast-button" onClick={() => updateServiceWorker(true)}>Reload</button> }
-            <button className="PWABadge-toast-button" onClick={() => close()}>Close</button>
+            {
+            needRefresh && <button className="PWABadge-toast-button" onClick={() => updateServiceWorker(true)}><RefreshCcw size={18} /></button> }
+            {!needRefresh && <button className="PWABadge-toast-button" onClick={() => close()}>X</button>}
           </div>
         </div>
       )}
