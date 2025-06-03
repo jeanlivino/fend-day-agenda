@@ -29,7 +29,7 @@ export const SpeakerCard = ({
   return (
     <Card className="max-w-[500px] p-5 w-full flex items-start flex-col justify-center bg-transparent border gap-4 border-[#D9B1FF] rounded-lg ">
       {showRoom && room && (
-        <span className="w-full text-[#E6D5F7] bg-[#261537] text-sm px-4 py-2 rounded-lg">
+        <span className="w-full text-[#E6D5F7] bg-[#9e570f] text-sm px-4 py-2 rounded-lg">
           Trilha:{" "}
           <b>{room in roomKeysMap ? roomKeysMap[room as RoomKeys].label : "Trilha desconhecida"}</b>
         </span>
@@ -39,7 +39,7 @@ export const SpeakerCard = ({
         <h1 className="text-[#E6D5F7] mt-0 pt-0 w-full text-wrap whitespace-normal text-base break-words">
           {label}
           {speaker?.keynote && (
-            <Badge variant="outline" className="bg-[#A855F7] text-white font-thin rounded-lg ml-1">
+            <Badge variant="outline" className="bg-[#ffb015] text-white font-thin rounded-lg ml-1">
               Keynote
             </Badge>
           )}
@@ -50,7 +50,7 @@ export const SpeakerCard = ({
           <Badge
             key={index}
             variant="outline"
-            className="bg-white text-[#A855F7] font-thin rounded-lg"
+            className="bg-white text-[#ffb015] font-thin rounded-lg"
           >
             {tag}
           </Badge>
@@ -68,9 +68,13 @@ export const SpeakerCard = ({
           />
         </div>
       )}
-      {hasPassed && <RatingButton label="Avaliar Palestra" ratingLink={`https://avaliacao.frontendday.com.br/${room}`}/>}
-       {!hasPassed&& <ToggleButton isSaved={isSaved} onToggle={handleToggleSave} />}
-
+      {hasPassed && (
+        <RatingButton
+          label="Avaliar Palestra"
+          ratingLink={`https://avaliacao.frontendday.com.br/${room}`}
+        />
+      )}
+      {!hasPassed && <ToggleButton isSaved={isSaved} onToggle={handleToggleSave} />}
     </Card>
   );
 };

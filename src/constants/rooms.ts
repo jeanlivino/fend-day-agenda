@@ -1,15 +1,9 @@
 export const roomKeysMap = {
   fendce: {
-    label: "Frontend",
+    label: "Palco Principal",
   },
-  w3c: {
-    label: "W3C / NiC.br",
-  },
-  firebank: {
-    label: "Fire Banking",
-  },
-  convida: {
-    label: "OPovo Convida",
+  conexao: {
+    label: "Palco Conexão",
   },
 } as const;
 

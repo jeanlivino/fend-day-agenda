@@ -18,7 +18,7 @@ export const ReturnButton = () => {
   return (
     <>
       <a onClick={onReturnClick} className="self-start">
-        <ChevronLeft size={28} className="text-[#A855F7] self-start absolute" />
+        <ChevronLeft size={28} className="text-[#ffb015] self-start absolute" />
       </a>
     </>
   );

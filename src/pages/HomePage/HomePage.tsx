@@ -44,7 +44,7 @@ export const HomePage = () => {
 
       {isLoading ? (
         <div className="my-8 w-full flex justify-center">
-          <LoaderCircle color="#A855F7" className="animate-spin w-16 h-16" />
+          <LoaderCircle color="#ffb015" className="animate-spin w-16 h-16" />
         </div>
       ) : (
         <>
@@ -81,7 +81,7 @@ export const HomePage = () => {
                 onChangeMode={() => toggleSaveCard(talk.id)}
               />
             ))}
-            <DeadComponent title="Encerramento / Premiação W3C" hours="19:50" />
+            <DeadComponent title="Encerramento" hours="19:50" />
           </div>
         </>
       )}

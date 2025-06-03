@@ -9,8 +9,8 @@ export const ButtonTalk = ({ children, active = false, mode, onModeChange }: Pro
   };
 
   const buttonColor = active
-    ? "bg-[#A855F7] border-[0.5px] border-[#A855F7] hover:bg-[#A855F7]/[.50] rounded-[5px] w-full"
-    : "bg-[#832BD8]/[.20] border-[0.5px] border-[#A855F7] hover:bg-[#A855F7]/[.50] rounded-[5px] w-full";
+    ? "bg-[#dc9200] border-[0.5px] border-[#ffb015] hover:bg-[#ffb015]/[.50] rounded-[5px] w-full"
+    : "bg-[#bd7e00]/[.20] border-[0.5px] border-[#ffb015] hover:bg-[#ffb015]/[.50] rounded-[5px] w-full";
 
   return (
     <Button className={buttonColor} onClick={handleClick}>
