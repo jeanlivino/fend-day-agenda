@@ -56,11 +56,7 @@ export const MyAgenda = () => {
           {talksBeforeMidDay.map((talk) => (
             <SpeakerCard
               key={talk.id}
-              hour={talk.hour}
-              label={talk.title}
-              tags={talk.tags}
-              speaker={talk.speaker}
-              room={talk.room}
+              talk={talk}
               showRoom
               isSaved
               onChangeMode={() => toggleSaveCard(talk.id)}
@@ -71,11 +67,7 @@ export const MyAgenda = () => {
           {talksAfterMidDay.map((talk) => (
             <SpeakerCard
               key={talk.id}
-              hour={talk.hour}
-              label={talk.title}
-              tags={talk.tags}
-              speaker={talk.speaker}
-              room={talk.room}
+              talk={talk}
               showRoom
               isSaved
               onChangeMode={() => toggleSaveCard(talk.id)}

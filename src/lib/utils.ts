@@ -1,9 +1,9 @@
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
 import { cva } from "class-variance-authority";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 export const buttonVariants = cva(
@@ -17,6 +17,7 @@ export const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:opacit-90",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        orange: "bg-[#ffb015] text-slate-950 hover:bg-[#ffb015]/80",
       },
       size: {
         default: "h-10 px-4 py-2",
@@ -37,8 +38,7 @@ export const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
+        default: "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
         secondary:
           "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
         destructive:
@@ -50,4 +50,4 @@ export const badgeVariants = cva(
       variant: "default",
     },
   }
-)
+);

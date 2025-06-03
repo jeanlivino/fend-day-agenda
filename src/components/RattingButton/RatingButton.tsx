@@ -4,7 +4,7 @@ import { RatingButtonProps } from "./types";
 export const RatingButton = ({ label, ratingLink }: RatingButtonProps) => {
   return (
     <a href={ratingLink} target="_blank" className="w-full flex justify-center">
-      <Button className="h-7 py-2 text-white bg-[#ffb015] border border-white rounded-lg font-medium px-8 hover:bg-[#842bd83e]">
+      <Button variant="orange" className="h-7 py-2 border border-white rounded-lg font-medium px-8">
         {label}
       </Button>
     </a>

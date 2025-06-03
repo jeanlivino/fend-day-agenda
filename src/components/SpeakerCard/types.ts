@@ -1,12 +1,8 @@
-import { Speaker } from "@/api/types";
+import { Palestra } from "@/api/types";
 
 export interface SpeakerCardProps {
-  speaker?: Speaker;
-  label: string;
-  tags: string[];
-  hour: string;
+  talk: Palestra;
   isSaved: boolean;
   showRoom?: boolean;
-  room?: string;
   onChangeMode: (mode: boolean) => void;
 }

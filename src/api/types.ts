@@ -1,4 +1,4 @@
-export type TalkCategory =  "fendce" | "w3c" | "firebank" | "convida";
+export type TalkCategory = "fendce" | "w3c" | "firebank" | "convida";
 
 export interface Agenda extends Record<TalkCategory, Palestra[]> {
   [type: string]: Palestra[];
@@ -10,6 +10,7 @@ export interface Palestra {
   hour: string;
   id: number;
   title: string;
+  description: string;
   tags: string[];
 }
 
