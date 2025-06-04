@@ -13,12 +13,12 @@ export const SpeakerDialog: React.FC<Props> = ({ talk, onClose }) => {
 
   return (
     <Dialog open onOpenChange={onClose}>
-      <DialogContent className="bg-white w-full max-w-[600px] p-4 rounded-lg">
-        <div className="grid grid-cols-[1fr,3fr] gap-4 p-4">
+      <DialogContent className="bg-white w-full max-w-[600px] max-h-[90vh] overflow-y-auto p-4 rounded-lg">
+        <div className="grid md:grid-cols-[1fr,3fr] gap-4 p-4">
           <img
             src={speaker.image}
             alt={speaker.title}
-            className="w-full aspect-square object-cover rounded-full"
+            className="w-full aspect-square object-cover rounded-full max-w-[200px]"
           />
           <div className="self-center">
             <h2 className="text-md font-semibold">{speaker.title}</h2>

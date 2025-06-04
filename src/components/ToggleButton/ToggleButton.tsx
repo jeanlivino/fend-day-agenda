@@ -40,7 +40,7 @@ export const ToggleButton = ({ isSaved, onToggle }: ToggleButtonProps) => {
       variant={!isSaved ? "outline" : "secondary"}
       className={cn("w-full", isSaved ? "hover:bg-white/70" : "hover:bg-white/30")}
     >
-      {!isSaved ? "Adicionar à agenda" : "Remover da agenda"}
+      Agenda
       {!isSaved ? (
         <PlusIcon className="ml-2" size={18} />
       ) : (
