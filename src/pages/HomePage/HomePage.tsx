@@ -53,7 +53,7 @@ export const HomePage = () => {
           </div>
 
           <div className="space-y-4 w-full max-w-[500px]">
-            <DeadComponent title="Abertura" hours="8:00" />
+            <DeadComponent title="Abertura" hours="8:30" />
             {talksBeforeMidDay.map((talk) => (
               <SpeakerCard
                 key={talk.id}
@@ -73,7 +73,7 @@ export const HomePage = () => {
                 onChangeMode={() => toggleSaveCard(talk.id)}
               />
             ))}
-            <DeadComponent title="Encerramento" hours="19:50" />
+            <DeadComponent title="Encerramento" hours="19:30" />
           </div>
         </>
       )}

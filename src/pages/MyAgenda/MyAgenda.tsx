@@ -51,7 +51,7 @@ export const MyAgenda = () => {
 
       {hasSavedTalks && (
         <div className="my-8 space-y-4">
-          <DeadComponent title={"Abertura"} hours={"8:00"} />
+          <DeadComponent title={"Abertura"} hours={"8:30"} />
 
           {talksBeforeMidDay.map((talk) => (
             <SpeakerCard
@@ -74,7 +74,7 @@ export const MyAgenda = () => {
             />
           ))}
 
-          <DeadComponent title="Encerramento" hours="19:50" />
+          <DeadComponent title="Encerramento" hours="19:30" />
         </div>
       )}
     </section>
