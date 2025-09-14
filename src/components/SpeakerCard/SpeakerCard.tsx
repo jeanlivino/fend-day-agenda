@@ -27,9 +27,8 @@ export const SpeakerCard = ({ talk, isSaved, showRoom, onChangeMode }: SpeakerCa
   return (
     <Card className="max-w-[500px] p-5 w-full flex items-start flex-col justify-center bg-transparent border gap-4 border-[#ffd5b1] rounded-lg ">
       {showRoom && room && (
-        <span className="w-full text-orange-50 bg-orange-800 text-sm px-4 py-2 rounded-lg">
-          Trilha:{" "}
-          <b>{room in roomKeysMap ? roomKeysMap[room as RoomKeys].label : "Trilha desconhecida"}</b>
+        <span className="w-full text-orange-50 bg-orange-800 text-sm px-4 py-2 rounded-lg font-bold">
+          {room in roomKeysMap ? roomKeysMap[room as RoomKeys].label : "Trilha desconhecida"}
         </span>
       )}
       <div className="flex gap-3 justify-between items-start w-full">

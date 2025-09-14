@@ -14,7 +14,7 @@ export const ButtonGroup = (props: Props) => {
     }
   };
   return (
-    <div className="grid grid-cols-2 items-center justify-center gap-3 w-full background-slate-200 max-w-[500px]">
+    <div className="grid grid-cols-3 md:grid-cols-3 items-center justify-center gap-3 w-full background-slate-200 max-w-[500px]">
       {roomKeys.map((roomKey) => (
         <ButtonTalk
           key={roomKey}

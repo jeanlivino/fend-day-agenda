@@ -1,9 +1,12 @@
 export const roomKeysMap = {
   fendce: {
-    label: "Palco Principal",
+    label: "Principal",
   },
   conexao: {
-    label: "Palco Conexão",
+    label: "Conexão",
+  },
+  workshop: {
+    label: "Workshop",
   },
 } as const;
 
