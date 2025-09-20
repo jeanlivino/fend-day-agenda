@@ -72,7 +72,7 @@ export const SpeakerCard = ({ talk, isSaved, showRoom, onChangeMode }: SpeakerCa
         {hasPassed && (
           <RatingButton
             label="Avaliar Palestra"
-            ratingLink={`https://avaliacao.frontendday.com.br/${room}`}
+            ratingLink={`https://avaliar.frontendday.com.br/${room}`}
           />
         )}
         {!hasPassed && <ToggleButton isSaved={isSaved} onToggle={handleToggleSave} />}
